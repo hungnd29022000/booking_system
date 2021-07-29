@@ -7,4 +7,6 @@ public interface ApartmentDao {
     Apartment getApartmentById(String apartmentId);
 
     Apartment postApartment(ApartmentResquest apartmentResquest);
+
+    Apartment updateApartment(ApartmentResquest apartmentResquest);
 }

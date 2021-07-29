@@ -3,6 +3,7 @@ package hungnd.booking_system.dao;
 import hungnd.booking_system.entity.Apartment;
 import hungnd.booking_system.factory.MySQLConnectionFactory;
 import hungnd.booking_system.model.request.ApartmentResquest;
+import hungnd.booking_system.utils.CommonUtils;
 import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
@@ -38,7 +39,6 @@ public class ApartmentDaoImpl extends AbstractDao implements ApartmentDao{
                 apartment.setDayMax(rs.getInt("day_max"));
             }
         } catch (Exception e) {
-            e.printStackTrace();
             eLogger.error(e.getMessage());
         }finally {
             releaseConnect(conn,stmt,rs);
@@ -70,14 +70,51 @@ public class ApartmentDaoImpl extends AbstractDao implements ApartmentDao{
             stmt.executeUpdate();
             rs = stmt.getGeneratedKeys();
             while(rs.next()){
-                result.setApartmentId(rs.getInt(1));
+                result = getApartmentById(""+rs.getInt(1));
             }
         } catch (Exception e) {
-            e.printStackTrace();
             eLogger.error(e.getMessage());
         }finally {
             releaseConnect(conn,stmt,rs);
         }
         return result;
+    }
+
+    @Override
+    public Apartment updateApartment(ApartmentResquest apartmentResquest) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        String sql = "UPDATE "+ t_apartment +
+                " SET ";
+        if(!CommonUtils.checkEmpty(apartmentResquest.getApartmentName())) {
+            sql += " apartment_name = '" + apartmentResquest.getApartmentName() + "'";
+        }if(!CommonUtils.checkEmpty(apartmentResquest.getApartmentAddress())) {
+            sql += " AND apartment_address = '" + apartmentResquest.getApartmentAddress() + "'";
+        }if(!CommonUtils.checkEmpty(apartmentResquest.getApartmentPrice())) {
+            sql += " AND apartment_price = " + apartmentResquest.getApartmentPrice();
+        }if(!CommonUtils.checkEmpty(apartmentResquest.getApartmentArea())) {
+            sql += " AND apartment_area = " + apartmentResquest.getApartmentArea();
+        }if(!CommonUtils.checkEmpty(apartmentResquest.getApartmentCapacity())) {
+            sql += " AND apartment_capacity = " + apartmentResquest.getApartmentCapacity();
+        }if(!CommonUtils.checkEmpty(apartmentResquest.getUserId())) {
+            sql += " AND user_id = " + apartmentResquest.getUserId() ;
+        }if(!CommonUtils.checkEmpty(apartmentResquest.getDayMin())) {
+            sql += " AND day_min = " + apartmentResquest.getDayMin() ;
+        }if(!CommonUtils.checkEmpty(apartmentResquest.getDayMax())) {
+            sql += " AND day_max = " + apartmentResquest.getDayMax();
+        }
+
+        sql+=  " WHERE apartment_id = "+apartmentResquest.getApartmentId();
+        try{
+            conn = MySQLConnectionFactory.getInstance().getMySQLConnection();
+            stmt = conn.prepareStatement(sql);
+            rs = stmt.executeQuery();
+        }catch (Exception e){
+            eLogger.error(e.getMessage());
+        }finally {
+            releaseConnect(conn,stmt,rs);
+        }
+        return getApartmentById(""+apartmentResquest.getApartmentId());
     }
 }

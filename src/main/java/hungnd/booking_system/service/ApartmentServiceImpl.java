@@ -28,4 +28,10 @@ public class ApartmentServiceImpl extends AbstractService implements ApartmentSe
         ApartmentResponse apartmentResponse = apartmentAdapter.transform(apartmentDao.postApartment(apartmentResquest));
         return apartmentResponse;
     }
+
+    @Override
+    public Object updateApartment(ApartmentResquest apartmentResquest) throws Exception {
+        ApartmentResponse apartmentResponse = apartmentAdapter.transform(apartmentDao.updateApartment(apartmentResquest));
+        return apartmentResponse;
+    }
 }

@@ -6,4 +6,6 @@ public interface ApartmentService {
     Object getApartmentById(String apartmentId) throws Exception;
 
     Object postApartment(ApartmentResquest apartmentResquest) throws Exception;
+
+    Object updateApartment(ApartmentResquest apartmentResquest) throws Exception;
 }
