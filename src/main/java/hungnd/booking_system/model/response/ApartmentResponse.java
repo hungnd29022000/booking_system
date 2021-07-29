@@ -5,9 +5,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class ApartmentResponse {
     @Expose
-    @SerializedName("apartment_id")
-    private int apartmentId;
-    @Expose
     @SerializedName("apartment_name")
     private String apartmentName;
     @Expose
@@ -34,14 +31,6 @@ public class ApartmentResponse {
 
     public String getApartmentName() {
         return apartmentName;
-    }
-
-    public int getApartmentId() {
-        return apartmentId;
-    }
-
-    public void setApartmentId(int apartmentId) {
-        this.apartmentId = apartmentId;
     }
 
     public void setApartmentName(String apartmentName) {

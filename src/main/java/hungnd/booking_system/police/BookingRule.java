@@ -1,4 +1,5 @@
 package hungnd.booking_system.police;
 
-public interface BookingRule {
+import hungnd.booking_system.model.request.BookingRequest;
+public interface BookingRule extends InterfaceRule<BookingRequest>{
 }

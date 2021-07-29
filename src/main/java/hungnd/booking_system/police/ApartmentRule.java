@@ -1,4 +1,6 @@
 package hungnd.booking_system.police;
 
-public interface ApartmentRule {
+import hungnd.booking_system.model.request.ApartmentResquest;
+
+public interface ApartmentRule extends InterfaceRule<ApartmentResquest>{
 }

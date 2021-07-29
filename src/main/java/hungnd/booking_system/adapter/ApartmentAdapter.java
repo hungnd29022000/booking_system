@@ -9,7 +9,6 @@ public class ApartmentAdapter extends AbstractAdapter implements EntityAdapter<A
     @Override
     public ApartmentResponse transform(Apartment entity) {
         ApartmentResponse apartmentResponse = new ApartmentResponse();
-        apartmentResponse.setApartmentId(entity.getApartmentId());
         apartmentResponse.setApartmentArea(entity.getApartmentArea());
         apartmentResponse.setApartmentAddress(entity.getApartmentAddress());
         apartmentResponse.setApartmentName(entity.getApartmentName());

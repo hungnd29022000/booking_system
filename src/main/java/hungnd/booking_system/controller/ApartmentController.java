@@ -81,8 +81,6 @@ public class ApartmentController extends BaseController{
                     dayMin,
                     dayMax
             );
-
-
             serverResponse = apartmentService.postApartment(apartmentResquest);
             svcResponse = gson.toJson(serverResponse);
             requestLogger.info("finish process request {} in {}", requestUri, sw.stop());
