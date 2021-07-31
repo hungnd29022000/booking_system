@@ -20,4 +20,6 @@ public class ConfigInfo {
     public static final String TABLE_APARTMENT = config.getString("table.mysql.apartment");
     public static final String TABLE_ROLE = config.getString("table.mysql.role");
     public static final String TABLE_USER = config.getString("table.mysql.user");
+
+    public static final String KEY = config.getString("secret.key");
 }

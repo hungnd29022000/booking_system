@@ -1,33 +1,41 @@
-package hungnd.booking_system.model.request;
+package hungnd.booking_system.entity.jpa;
 
-import com.sun.beans.editors.DoubleEditor;
+import javax.persistence.*;
 
-public class BookingRequest {
+@Entity
+@Table(name = "booking")
+public class Booking {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "booking_id")
     private Long bookingId;
+    @Column(name = "apartment_id")
     private Long apartmentId;
+    @Column(name = "user_id")
     private Long userId;
-    private String customerName;
-    private String customerPhone;
+    @Column(name = "check_in")
     private String checkIn;
+    @Column(name = "check_out")
     private String checkOut;
-    private int numberOfGuest;
-    private Double totalAmount;
+    @Column(name = "guest_count")
+    private int guestCount;
+    @Column(name = "total")
+    private Long total;
+    @Column(name = "booking_time")
     private String bookingTime;
+    @Column(name = "status")
     private int status;
 
-    public BookingRequest() {
+    public Booking() {
     }
 
-    public BookingRequest(Long bookingId, Long apartmentId, Long userId, String customerName, String customerPhone, String checkIn, String checkOut, int numberOfGuest, Double totalAmount, String bookingTime, int status) {
-        this.bookingId = bookingId;
+    public Booking(Long apartmentId, Long userId, String checkIn, String checkOut, int guestCount, Long total, String bookingTime, int status) {
         this.apartmentId = apartmentId;
         this.userId = userId;
-        this.customerName = customerName;
-        this.customerPhone = customerPhone;
         this.checkIn = checkIn;
         this.checkOut = checkOut;
-        this.numberOfGuest = numberOfGuest;
-        this.totalAmount = totalAmount;
+        this.guestCount = guestCount;
+        this.total = total;
         this.bookingTime = bookingTime;
         this.status = status;
     }
@@ -56,22 +64,6 @@ public class BookingRequest {
         this.userId = userId;
     }
 
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
-
-    public String getCustomerPhone() {
-        return customerPhone;
-    }
-
-    public void setCustomerPhone(String customerPhone) {
-        this.customerPhone = customerPhone;
-    }
-
     public String getCheckIn() {
         return checkIn;
     }
@@ -88,20 +80,20 @@ public class BookingRequest {
         this.checkOut = checkOut;
     }
 
-    public int getNumberOfGuest() {
-        return numberOfGuest;
+    public int getGuestCount() {
+        return guestCount;
     }
 
-    public void setNumberOfGuest(int numberOfGuest) {
-        this.numberOfGuest = numberOfGuest;
+    public void setGuestCount(int guestCount) {
+        this.guestCount = guestCount;
     }
 
-    public Double getTotalAmount() {
-        return totalAmount;
+    public Long getTotal() {
+        return total;
     }
 
-    public void setTotalAmount(Double totalAmount) {
-        this.totalAmount = totalAmount;
+    public void setTotal(Long total) {
+        this.total = total;
     }
 
     public String getBookingTime() {

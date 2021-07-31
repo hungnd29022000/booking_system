@@ -1,8 +1,8 @@
 package hungnd.booking_system.model.request;
 
 public class ApartmentResquest {
-    private int apartmentId;
-    private int userId;
+    private Long apartmentId;
+    private Long ownerId;
     private String apartmentName;
     private int apartmentCapacity;
     private Double apartmentPrice;
@@ -14,8 +14,8 @@ public class ApartmentResquest {
     public ApartmentResquest() {
     }
 
-    public ApartmentResquest(int userId, String apartmentName, int apartmentCapacity, Double apartmentPrice, String apartmentAddress, Double apartmentArea, int dayMin, int dayMax) {
-        this.userId = userId;
+    public ApartmentResquest(long ownerId, String apartmentName, int apartmentCapacity, Double apartmentPrice, String apartmentAddress, Double apartmentArea, int dayMin, int dayMax) {
+        this.ownerId = ownerId;
         this.apartmentName = apartmentName;
         this.apartmentCapacity = apartmentCapacity;
         this.apartmentPrice = apartmentPrice;
@@ -25,20 +25,20 @@ public class ApartmentResquest {
         this.dayMax = dayMax;
     }
 
-    public int getApartmentId() {
+    public Long getApartmentId() {
         return apartmentId;
     }
 
-    public void setApartmentId(int apartmentId) {
+    public void setApartmentId(Long apartmentId) {
         this.apartmentId = apartmentId;
     }
 
-    public int getUserId() {
-        return userId;
+    public long getOwnerId() {
+        return ownerId;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setOwnerId(long ownerId) {
+        this.ownerId = ownerId;
     }
 
     public String getApartmentName() {

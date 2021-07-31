@@ -8,15 +8,15 @@ public class RoleResponse {
     @SerializedName("role_name")
     private String roleName;
     @Expose
-    @SerializedName("user_id")
-    private String userId;
+    @SerializedName("username")
+    private String userName;
 
     public RoleResponse() {
     }
 
-    public RoleResponse(String roleName, String userId) {
+    public RoleResponse(String roleName, String userName) {
         this.roleName = roleName;
-        this.userId = userId;
+        this.userName = userName;
     }
 
     public String getRoleName() {
@@ -27,11 +27,11 @@ public class RoleResponse {
         this.roleName = roleName;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

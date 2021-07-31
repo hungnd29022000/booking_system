@@ -26,7 +26,7 @@ public class BookingController extends BaseController {
     public ResponseEntity<String> getBookingById(
             HttpServletRequest request,
             HttpServletResponse response,
-            @RequestParam(value = "booking_id") String bookingId
+            @RequestParam(value = "booking_id") Long bookingId
     ){
         StopWatch sw = new StopWatch();
         String requestUri = request.getRequestURI() + "?" + getRequestParams(request);
@@ -50,15 +50,40 @@ public class BookingController extends BaseController {
         return new ResponseEntity<>(svcResponse, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/bookings", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<String> getAllBooking(
+            HttpServletRequest request,
+            HttpServletResponse response
+    ){
+        StopWatch sw = new StopWatch();
+        String requestUri = request.getRequestURI() + "?" + getRequestParams(request);
+        String svcResponse;
+        Object serverResponse;
+        try {
+            serverResponse = bookingService.findAll();
+            svcResponse = gson.toJson(serverResponse);
+            requestLogger.info("finish process request {} in {}", requestUri, sw.stop());
+            return new ResponseEntity<>(svcResponse, HttpStatus.OK);
+
+        } catch (CommonException se) {
+            se.printStackTrace();
+            eLogger.error(se.getMessage());
+            svcResponse = buildFailureResponse(se.getCode(), se.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+            eLogger.error("get all booking error: {}", e.getMessage());
+            svcResponse = buildFailureResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "an error occurred");
+        }
+        return new ResponseEntity<>(svcResponse, HttpStatus.OK);
+    }
+
 
     @PostMapping(value = "/booking", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<String> postBooking(
             HttpServletRequest request,
             HttpServletResponse response,
-            @RequestParam(value = "user_id") String userId,
-            @RequestParam(value = "apartment_id") String apartmentId,
-            @RequestParam(value = "customer_name") String customerName,
-            @RequestParam(value = "customer_phone") String customerPhone,
+            @RequestParam(value = "user_id") Long userId,
+            @RequestParam(value = "apartment_id") Long apartmentId,
             @RequestParam(value = "check_in") String checkIn,
             @RequestParam(value = "check_out") String checkOut,
             @RequestParam(value = "number_of_guest") int numberOfGuest
@@ -71,8 +96,6 @@ public class BookingController extends BaseController {
             BookingRequest bookingRequest = new BookingRequest();
             bookingRequest.setUserId(userId);
             bookingRequest.setApartmentId(apartmentId);
-            bookingRequest.setCustomerName(customerName);
-            bookingRequest.setCustomerPhone(customerPhone);
             bookingRequest.setCheckIn(checkIn);
             bookingRequest.setCheckOut(checkOut);
             bookingRequest.setNumberOfGuest(numberOfGuest);

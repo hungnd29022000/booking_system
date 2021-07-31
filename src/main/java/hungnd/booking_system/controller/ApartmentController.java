@@ -27,7 +27,7 @@ public class ApartmentController extends BaseController{
     public ResponseEntity<String> getApartmentById(
             HttpServletRequest request,
             HttpServletResponse response,
-            @RequestParam(value = "apartment_id") String apartmentId
+            @RequestParam(value = "apartment_id") Long apartmentId
     ){
         StopWatch sw = new StopWatch();
         String requestUri = request.getRequestURI() + "?" + getRequestParams(request);
@@ -51,12 +51,39 @@ public class ApartmentController extends BaseController{
         return new ResponseEntity<>(svcResponse, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/apartments", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<String> getAllUser(
+            HttpServletRequest request,
+            HttpServletResponse response
+    ){
+        StopWatch sw = new StopWatch();
+        String requestUri = request.getRequestURI() + "?" + getRequestParams(request);
+        String svcResponse;
+        Object serverResponse;
+        try {
+            serverResponse = apartmentService.findAll();
+            svcResponse = gson.toJson(serverResponse);
+            requestLogger.info("finish process request {} in {}", requestUri, sw.stop());
+            return new ResponseEntity<>(svcResponse, HttpStatus.OK);
+
+        } catch (CommonException se) {
+            se.printStackTrace();
+            eLogger.error(se.getMessage());
+            svcResponse = buildFailureResponse(se.getCode(), se.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+            eLogger.error("get all apartment error: {}", e.getMessage());
+            svcResponse = buildFailureResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "an error occurred");
+        }
+        return new ResponseEntity<>(svcResponse, HttpStatus.OK);
+    }
+
 
     @PostMapping(value = "/apartment", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<String> postApartment(
             HttpServletRequest request,
             HttpServletResponse response,
-            @RequestParam(value = "user_id") int userId,
+            @RequestParam(value = "owner_id") long ownerId,
             @RequestParam(value = "apartment_name") String apartmentName,
             @RequestParam(value = "apartment_capacity") int apartmentCapacity,
             @RequestParam(value = "apartment_area") Double aparmentArea,
@@ -72,7 +99,7 @@ public class ApartmentController extends BaseController{
         Object serverResponse;
         try {
             ApartmentResquest apartmentResquest = new ApartmentResquest(
-                    userId,
+                    ownerId,
                     apartmentName,
                     apartmentCapacity,
                     apartmentPrice,
@@ -82,53 +109,6 @@ public class ApartmentController extends BaseController{
                     dayMax
             );
             serverResponse = apartmentService.postApartment(apartmentResquest);
-            svcResponse = gson.toJson(serverResponse);
-            requestLogger.info("finish process request {} in {}", requestUri, sw.stop());
-            return new ResponseEntity<>(svcResponse, HttpStatus.OK);
-
-        } catch (CommonException se) {
-            se.printStackTrace();
-            eLogger.error(se.getMessage());
-            svcResponse = buildFailureResponse(se.getCode(), se.getMessage());
-        } catch (Exception e) {
-            e.printStackTrace();
-            eLogger.error("find all employee error: {}", e.getMessage());
-            svcResponse = buildFailureResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "an error occurred");
-        }
-        return new ResponseEntity<>(svcResponse, HttpStatus.OK);
-    }
-    @PutMapping(value = "/apartment", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<String> updateApartment(
-            HttpServletRequest request,
-            HttpServletResponse response,
-            @RequestParam(value = "user_id", defaultValue = "") int userId,
-            @RequestParam(value = "apartment_id") int apartmentId,
-            @RequestParam(value = "apartment_name", defaultValue = "") String apartmentName,
-            @RequestParam(value = "apartment_capacity", defaultValue = "") int apartmentCapacity,
-            @RequestParam(value = "apartment_area", defaultValue = "") Double aparmentArea,
-            @RequestParam(value = "apartment_address", defaultValue = "") String apartmentAddress,
-            @RequestParam(value = "apartment_price", defaultValue = "") Double apartmentPrice,
-            @RequestParam(value = "day_min", defaultValue = "") int dayMin,
-            @RequestParam(value = "day_max", defaultValue = "") int dayMax
-
-    ){
-        StopWatch sw = new StopWatch();
-        String requestUri = request.getRequestURI() + "?" + getRequestParams(request);
-        String svcResponse;
-        Object serverResponse;
-        try {
-            ApartmentResquest apartmentResquest = new ApartmentResquest(
-                    userId,
-                    apartmentName,
-                    apartmentCapacity,
-                    apartmentPrice,
-                    apartmentAddress,
-                    aparmentArea,
-                    dayMin,
-                    dayMax
-            );
-            apartmentResquest.setApartmentId(apartmentId);
-            serverResponse = apartmentService.updateApartment(apartmentResquest);
             svcResponse = gson.toJson(serverResponse);
             requestLogger.info("finish process request {} in {}", requestUri, sw.stop());
             return new ResponseEntity<>(svcResponse, HttpStatus.OK);

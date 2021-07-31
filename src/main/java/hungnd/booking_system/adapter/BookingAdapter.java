@@ -1,10 +1,9 @@
 package hungnd.booking_system.adapter;
 
-import hungnd.booking_system.entity.Booking;
+import hungnd.booking_system.entity.jpa.Booking;
+import hungnd.booking_system.model.request.BookingRequest;
 import hungnd.booking_system.model.response.BookingResponse;
 import org.springframework.stereotype.Component;
-
-import java.awt.print.Book;
 
 @Component("bookingAdapter")
 public class BookingAdapter extends AbstractAdapter implements EntityAdapter<Booking, BookingResponse> {
@@ -13,15 +12,32 @@ public class BookingAdapter extends AbstractAdapter implements EntityAdapter<Boo
         BookingResponse bookingResponse = new BookingResponse(
                 entity.getApartmentId(),
                 entity.getUserId(),
-                entity.getCustomerName(),
-                entity.getCustomerPhone(),
                 entity.getCheckIn(),
                 entity.getCheckOut(),
-                entity.getNumberOfGuest(),
-                entity.getTotalAmount(),
+                entity.getGuestCount(),
+                entity.getTotal(),
                 entity.getBookingTime(),
                 entity.getStatus()
         );
         return bookingResponse;
+    }
+
+    public Booking transform(BookingRequest bookingRequest){
+        Booking booking = new Booking(
+                bookingRequest.getApartmentId(),
+                bookingRequest.getUserId(),
+                bookingRequest.getCheckIn(),
+                bookingRequest.getCheckOut(),
+                bookingRequest.getNumberOfGuest(),
+                bookingRequest.getBookingId(),
+                bookingRequest.getBookingTime(),
+                bookingRequest.getStatus()
+        );
+
+        if (bookingRequest.getBookingId() != null){
+            booking.setBookingId(bookingRequest.getBookingId());
+        }
+
+        return booking;
     }
 }

@@ -9,7 +9,7 @@ public class ApartmentResponse {
     private String apartmentName;
     @Expose
     @SerializedName("owner_id")
-    private int ownerId;
+    private Long ownerId;
     @Expose
     @SerializedName("apartment_capacity")
     private int apartmentCapacity;
@@ -37,11 +37,11 @@ public class ApartmentResponse {
         this.apartmentName = apartmentName;
     }
 
-    public int getOwnerId() {
+    public long getOwnerId() {
         return ownerId;
     }
 
-    public void setOwnerId(int ownerId) {
+    public void setOwnerId(long ownerId) {
         this.ownerId = ownerId;
     }
 

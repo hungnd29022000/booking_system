@@ -1,10 +1,7 @@
-package hungnd.booking_system.dao;
+package hungnd.booking_system.dao.jdbc;
 
 import hungnd.booking_system.entity.Booking;
 import hungnd.booking_system.model.request.BookingRequest;
 
 public interface BookingDao {
-    Booking getBookingById(String bookingId);
-
-    Booking postBooking(BookingRequest bookingRequest);
 }

@@ -15,7 +15,7 @@ public class DateTimeUtils {
      * @return date String in yyyy-MM-dd format
      */
     public static String generateTime(long timeInMilliSecs) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(timeInMilliSecs);
         return simpleDateFormat.format(cal.getTime());

@@ -1,4 +1,4 @@
-package hungnd.booking_system.dao;
+package hungnd.booking_system.dao.jdbc;
 
 import hungnd.booking_system.global.ConfigInfo;
 import org.apache.logging.log4j.LogManager;

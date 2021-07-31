@@ -17,6 +17,7 @@ import java.util.Random;
 import java.util.regex.Pattern;
 import java.util.zip.CRC32;
 import java.util.zip.Checksum;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class CommonUtils {
     /**
@@ -160,6 +161,10 @@ public class CommonUtils {
     public static synchronized String validateNull(String source) {
         if (source == null) return "";
         return source.trim();
+    }
+
+    public static String Bcrypt(String pass){
+        return BCrypt.hashpw(pass,BCrypt.gensalt(12));
     }
 
     public static boolean checkEmpty(String input) {

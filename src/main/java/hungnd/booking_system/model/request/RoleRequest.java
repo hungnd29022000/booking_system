@@ -1,23 +1,20 @@
 package hungnd.booking_system.model.request;
 
 public class RoleRequest {
-    private String roleId;
+    private Long roleId;
     private String roleName;
-    private String userId;
+    private String userName;
+    private String start;
+    private String exp;
 
     public RoleRequest() {
     }
 
-    public RoleRequest(String roleName, String userId) {
-        this.roleName = roleName;
-        this.userId = userId;
-    }
-
-    public String getRoleId() {
+    public Long getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(String roleId) {
+    public void setRoleId(Long roleId) {
         this.roleId = roleId;
     }
 
@@ -29,11 +26,27 @@ public class RoleRequest {
         this.roleName = roleName;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getStart() {
+        return start;
+    }
+
+    public void setStart(String start) {
+        this.start = start;
+    }
+
+    public String getExp() {
+        return exp;
+    }
+
+    public void setExp(String exp) {
+        this.exp = exp;
     }
 }
