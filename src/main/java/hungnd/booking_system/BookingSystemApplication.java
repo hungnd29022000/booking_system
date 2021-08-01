@@ -1,7 +1,6 @@
 package hungnd.booking_system;
 
 import hungnd.booking_system.global.ConfigInfo;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;

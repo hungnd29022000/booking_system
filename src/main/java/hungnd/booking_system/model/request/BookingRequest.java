@@ -1,7 +1,5 @@
 package hungnd.booking_system.model.request;
 
-import com.sun.beans.editors.DoubleEditor;
-
 public class BookingRequest {
     private Long bookingId;
     private Long apartmentId;

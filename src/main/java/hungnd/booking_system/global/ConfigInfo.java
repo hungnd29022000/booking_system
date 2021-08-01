@@ -1,8 +1,9 @@
 package hungnd.booking_system.global;
 
-import java.io.File;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
+
+import java.io.File;
 
 public class ConfigInfo {
     private static Config config = ConfigFactory.parseFile(new File("conf.properties"));

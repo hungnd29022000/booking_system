@@ -1,4 +1,7 @@
 package hungnd.booking_system.utils;
+
+import org.mindrot.jbcrypt.BCrypt;
+
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import java.net.InetAddress;
@@ -14,7 +17,6 @@ import java.util.Random;
 import java.util.regex.Pattern;
 import java.util.zip.CRC32;
 import java.util.zip.Checksum;
-import org.mindrot.jbcrypt.BCrypt;
 
 public class CommonUtils {
     /**

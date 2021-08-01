@@ -2,9 +2,7 @@ package hungnd.booking_system.controller;
 
 import com.ecyrd.speed4j.StopWatch;
 import hungnd.booking_system.exception.CommonException;
-import hungnd.booking_system.model.request.ApartmentResquest;
 import hungnd.booking_system.model.request.BookingRequest;
-import hungnd.booking_system.model.response.BookingResponse;
 import hungnd.booking_system.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
