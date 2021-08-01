@@ -1,9 +1,8 @@
 package hungnd.booking_system.service;
 
 import hungnd.booking_system.adapter.BookingAdapter;
-import hungnd.booking_system.dao.jdbc.BookingDao;
 import hungnd.booking_system.dao.repository.BookingRepo;
-import hungnd.booking_system.entity.jpa.Booking;
+import hungnd.booking_system.entity.Booking;
 import hungnd.booking_system.model.request.BookingRequest;
 import hungnd.booking_system.model.response.BookingResponse;
 import hungnd.booking_system.police.BookingRule;

@@ -1,13 +1,16 @@
 package hungnd.booking_system.service;
 
+import hungnd.booking_system.adapter.ApartmentAdapter;
 import hungnd.booking_system.adapter.UserAdapter;
+import hungnd.booking_system.dao.jdbc.ApartmentDao;
 import hungnd.booking_system.dao.jdbc.RoleDao;
 import hungnd.booking_system.dao.jdbc.UserDao;
 import hungnd.booking_system.dao.repository.RoleRepo;
-import hungnd.booking_system.entity.jpa.Role;
-import hungnd.booking_system.entity.jpa.User;
-import hungnd.booking_system.exception.CommonException;
+import hungnd.booking_system.entity.Role;
+import hungnd.booking_system.entity.User;
+import hungnd.booking_system.model.request.ApartmentResquest;
 import hungnd.booking_system.model.request.UserRequest;
+import hungnd.booking_system.model.response.ApartmentResponse;
 import hungnd.booking_system.model.response.UserResponse;
 import hungnd.booking_system.police.UserRule;
 import hungnd.booking_system.dao.repository.UserRepo;
@@ -16,23 +19,33 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl extends AbstractService implements UserService {
-    @Autowired
-    private UserDao userDao;
 
+    //DAO
     @Autowired
-    private RoleDao roleDao;
+    private ApartmentDao apartmentDao;
 
+
+    //RULE
     @Autowired
     private UserRule userRule;
 
+
+    //ADAPTER
     @Autowired
     @Qualifier("userAdapter")
     private UserAdapter userAdapter;
 
+    @Autowired
+    @Qualifier("apartmentAdapter")
+    private ApartmentAdapter apartmentAdapter;
+
+
+    //DAO REPO
     @Autowired
     private UserRepo userRepo;
 
@@ -42,6 +55,7 @@ public class UserServiceImpl extends AbstractService implements UserService {
     @Override
     public Object getUserById(Long userId) throws Exception {
         UserResponse userResponse = userAdapter.transform(userRepo.findById(userId).get());
+        userResponse.setRoleName(roleRepo.findRoleByUserName(userResponse.getUserName()).getRoleName());
         return userResponse;
     }
 
@@ -74,5 +88,22 @@ public class UserServiceImpl extends AbstractService implements UserService {
                         }
                 )
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Object findApartmentByUser(ApartmentResquest apartmentResquest, Double priceMax) throws Exception {
+        List<ApartmentResponse> apartmentResponseList = apartmentDao.findApartmentByUser(apartmentResquest, priceMax).stream()
+                .map(
+                        apartment -> apartmentAdapter.transform(apartment)
+                )
+                .collect(Collectors.toList());
+        return apartmentResponseList;
+    }
+
+    @Override
+    public Object findUserByUserName(String username) throws Exception {
+        UserResponse userResponse = userAdapter.transform(userRepo.findUserByUserName(username));
+        userResponse.setRoleName(roleRepo.findRoleByUserName(userResponse.getUserName()).getRoleName());
+        return userResponse;
     }
 }

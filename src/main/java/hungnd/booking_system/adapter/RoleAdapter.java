@@ -1,6 +1,6 @@
 package hungnd.booking_system.adapter;
 
-import hungnd.booking_system.entity.jpa.Role;
+import hungnd.booking_system.entity.Role;
 import hungnd.booking_system.model.request.RoleRequest;
 import hungnd.booking_system.model.response.RoleResponse;
 import org.springframework.stereotype.Component;

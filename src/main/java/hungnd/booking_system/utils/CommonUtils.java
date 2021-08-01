@@ -1,7 +1,4 @@
 package hungnd.booking_system.utils;
-
-import com.sun.istack.internal.NotNull;
-
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import java.net.InetAddress;
@@ -92,7 +89,7 @@ public class CommonUtils {
         return sb.toString();
     }
 
-    public static String md5(@NotNull String input) throws Exception {
+    public static String md5( String input) throws Exception {
         if (input == null) throw new NullPointerException();
         String result;
         MessageDigest md5 = MessageDigest.getInstance("MD5");

@@ -1,7 +1,7 @@
 package hungnd.booking_system.security.service;
 
 import hungnd.booking_system.dao.repository.UserRepo;
-import hungnd.booking_system.entity.jpa.User;
+import hungnd.booking_system.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -1,59 +1,67 @@
 package hungnd.booking_system.entity;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "booking")
 public class Booking {
-    private String bookingId;
-    private String apartmentId;
-    private String userId;
-    private String customerName;
-    private String customerPhone;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "booking_id")
+    private Long bookingId;
+    @Column(name = "apartment_id")
+    private Long apartmentId;
+    @Column(name = "user_id")
+    private Long userId;
+    @Column(name = "check_in")
     private String checkIn;
+    @Column(name = "check_out")
     private String checkOut;
-    private int numberOfGuest;
-    private Long totalAmount;
+    @Column(name = "guest_count")
+    private int guestCount;
+    @Column(name = "total")
+    private Long total;
+    @Column(name = "booking_time")
     private String bookingTime;
+    @Column(name = "status")
     private int status;
 
     public Booking() {
     }
 
-    public String getBookingId() {
+    public Booking(Long apartmentId, Long userId, String checkIn, String checkOut, int guestCount, Long total, String bookingTime, int status) {
+        this.apartmentId = apartmentId;
+        this.userId = userId;
+        this.checkIn = checkIn;
+        this.checkOut = checkOut;
+        this.guestCount = guestCount;
+        this.total = total;
+        this.bookingTime = bookingTime;
+        this.status = status;
+    }
+
+    public Long getBookingId() {
         return bookingId;
     }
 
-    public void setBookingId(String bookingId) {
+    public void setBookingId(Long bookingId) {
         this.bookingId = bookingId;
     }
 
-    public String getApartmentId() {
+    public Long getApartmentId() {
         return apartmentId;
     }
 
-    public void setApartmentId(String apartmentId) {
+    public void setApartmentId(Long apartmentId) {
         this.apartmentId = apartmentId;
     }
 
-    public String getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
-    }
-
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
-
-    public String getCustomerPhone() {
-        return customerPhone;
-    }
-
-    public void setCustomerPhone(String customerPhone) {
-        this.customerPhone = customerPhone;
     }
 
     public String getCheckIn() {
@@ -72,20 +80,20 @@ public class Booking {
         this.checkOut = checkOut;
     }
 
-    public int getNumberOfGuest() {
-        return numberOfGuest;
+    public int getGuestCount() {
+        return guestCount;
     }
 
-    public void setNumberOfGuest(int numberOfGuest) {
-        this.numberOfGuest = numberOfGuest;
+    public void setGuestCount(int guestCount) {
+        this.guestCount = guestCount;
     }
 
-    public Long getTotalAmount() {
-        return totalAmount;
+    public Long getTotal() {
+        return total;
     }
 
-    public void setTotalAmount(Long totalAmount) {
-        this.totalAmount = totalAmount;
+    public void setTotal(Long total) {
+        this.total = total;
     }
 
     public String getBookingTime() {
@@ -102,22 +110,5 @@ public class Booking {
 
     public void setStatus(int status) {
         this.status = status;
-    }
-
-    @Override
-    public String toString() {
-        return "Booking{" +
-                "bookingId='" + bookingId + '\'' +
-                ", apartmentId='" + apartmentId + '\'' +
-                ", userId='" + userId + '\'' +
-                ", customerName='" + customerName + '\'' +
-                ", customerPhone='" + customerPhone + '\'' +
-                ", checkIn='" + checkIn + '\'' +
-                ", checkOut='" + checkOut + '\'' +
-                ", numberOfGuest=" + numberOfGuest +
-                ", totalAmount=" + totalAmount +
-                ", bookingTime='" + bookingTime + '\'' +
-                ", status=" + status +
-                '}';
     }
 }

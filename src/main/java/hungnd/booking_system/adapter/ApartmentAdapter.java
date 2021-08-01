@@ -1,6 +1,6 @@
 package hungnd.booking_system.adapter;
 
-import hungnd.booking_system.entity.jpa.Apartment;
+import hungnd.booking_system.entity.Apartment;
 import hungnd.booking_system.model.request.ApartmentResquest;
 import hungnd.booking_system.model.response.ApartmentResponse;
 import org.springframework.stereotype.Component;

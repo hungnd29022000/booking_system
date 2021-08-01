@@ -25,7 +25,7 @@ public class JwtAuthenticationController {
 	@Autowired
 	private UserDetailsService userDetailsService;
 
-	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ResponseEntity<?> createAuthenticationToken(
 			@RequestParam(value = "username") String username,
 			@RequestParam(value = "password") String password
@@ -39,8 +39,9 @@ public class JwtAuthenticationController {
 				.loadUserByUsername(authenticationRequest.getUsername());
 
 		final String token = jwtTokenUtil.generateToken(userDetails);
+		final Long exp = 3600000L;
 
-		return ResponseEntity.ok(new JwtResponse(token));
+		return ResponseEntity.ok(new JwtResponse(token, exp));
 	}
 
 

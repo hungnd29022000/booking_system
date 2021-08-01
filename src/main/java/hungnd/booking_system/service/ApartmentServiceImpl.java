@@ -2,7 +2,7 @@ package hungnd.booking_system.service;
 
 import hungnd.booking_system.adapter.ApartmentAdapter;
 import hungnd.booking_system.dao.repository.ApartmentRepo;
-import hungnd.booking_system.entity.jpa.Apartment;
+import hungnd.booking_system.entity.Apartment;
 import hungnd.booking_system.model.request.ApartmentResquest;
 import hungnd.booking_system.model.response.ApartmentResponse;
 import org.springframework.beans.factory.annotation.Autowired;

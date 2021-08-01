@@ -3,7 +3,7 @@ package hungnd.booking_system.service;
 import hungnd.booking_system.adapter.RoleAdapter;
 import hungnd.booking_system.dao.jdbc.RoleDao;
 import hungnd.booking_system.dao.repository.RoleRepo;
-import hungnd.booking_system.entity.jpa.Role;
+import hungnd.booking_system.entity.Role;
 import hungnd.booking_system.model.request.RoleRequest;
 import hungnd.booking_system.model.response.RoleResponse;
 import org.springframework.beans.factory.annotation.Autowired;

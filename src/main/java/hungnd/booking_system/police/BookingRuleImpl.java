@@ -1,8 +1,7 @@
 package hungnd.booking_system.police;
 
-import hungnd.booking_system.dao.jdbc.ApartmentDao;
 import hungnd.booking_system.dao.repository.ApartmentRepo;
-import hungnd.booking_system.entity.jpa.Apartment;
+import hungnd.booking_system.entity.Apartment;
 import hungnd.booking_system.exception.CommonException;
 import hungnd.booking_system.model.request.BookingRequest;
 import hungnd.booking_system.utils.DateTimeUtils;

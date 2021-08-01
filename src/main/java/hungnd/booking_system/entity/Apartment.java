@@ -1,85 +1,99 @@
 package hungnd.booking_system.entity;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "apartment")
 public class Apartment {
-    private int apartmentId;
-    private int userId;
-    private String apartmentName;
-    private int apartmentCapacity;
-    private Double apartmentPrice;
-    private String apartmentAddress;
-    private Double apartmentArea;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "apartment_id")
+    private Long apartmentId;
+    @Column(name = "owner_id")
+    private Long ownerId;
+    @Column(name = "name")
+    private String name;
+    @Column(name = "capacity")
+    private int capacity;
+    @Column(name = "price")
+    private Double price;
+    @Column(name = "address")
+    private String address;
+    @Column(name = "area")
+    private Double area;
+    @Column(name = "day_min")
     private int dayMin;
+    @Column(name = "day_max")
     private int dayMax;
 
     public Apartment() {
     }
 
-    public Apartment(int apartmentId, int userId, String apartmentName, int apartmentCapacity, Double apartmentPrice, String apartmentAddress, Double apartmentArea, int dayMin, int dayMax) {
-        this.apartmentId = apartmentId;
-        this.userId = userId;
-        this.apartmentName = apartmentName;
-        this.apartmentCapacity = apartmentCapacity;
-        this.apartmentPrice = apartmentPrice;
-        this.apartmentAddress = apartmentAddress;
-        this.apartmentArea = apartmentArea;
+    public Apartment(Long ownerId, String name, int capacity, Double price, String address, Double area, int dayMin, int dayMax) {
+        this.ownerId = ownerId;
+        this.name = name;
+        this.capacity = capacity;
+        this.price = price;
+        this.address = address;
+        this.area = area;
         this.dayMin = dayMin;
         this.dayMax = dayMax;
     }
 
-    public int getApartmentId() {
+    public Long getApartmentId() {
         return apartmentId;
     }
 
-    public void setApartmentId(int apartmentId) {
+    public void setApartmentId(Long apartmentId) {
         this.apartmentId = apartmentId;
     }
 
-    public int getUserId() {
-        return userId;
+    public Long getOwnerId() {
+        return ownerId;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setOwnerId(Long ownerId) {
+        this.ownerId = ownerId;
     }
 
-    public String getApartmentName() {
-        return apartmentName;
+    public String getName() {
+        return name;
     }
 
-    public void setApartmentName(String apartmentName) {
-        this.apartmentName = apartmentName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getApartmentCapacity() {
-        return apartmentCapacity;
+    public int getCapacity() {
+        return capacity;
     }
 
-    public void setApartmentCapacity(int apartmentCapacity) {
-        this.apartmentCapacity = apartmentCapacity;
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
 
-    public Double getApartmentPrice() {
-        return apartmentPrice;
+    public Double getPrice() {
+        return price;
     }
 
-    public void setApartmentPrice(Double apartmentPrice) {
-        this.apartmentPrice = apartmentPrice;
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
-    public String getApartmentAddress() {
-        return apartmentAddress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setApartmentAddress(String apartmentAddress) {
-        this.apartmentAddress = apartmentAddress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public Double getApartmentArea() {
-        return apartmentArea;
+    public Double getArea() {
+        return area;
     }
 
-    public void setApartmentArea(Double apartmentArea) {
-        this.apartmentArea = apartmentArea;
+    public void setArea(Double area) {
+        this.area = area;
     }
 
     public int getDayMin() {
@@ -96,20 +110,5 @@ public class Apartment {
 
     public void setDayMax(int dayMax) {
         this.dayMax = dayMax;
-    }
-
-    @Override
-    public String toString() {
-        return "Apartment{" +
-                "apartmentId='" + apartmentId + '\'' +
-                ", userId='" + userId + '\'' +
-                ", apartmentName='" + apartmentName + '\'' +
-                ", apartmentCapacity=" + apartmentCapacity +
-                ", apartmentPrice=" + apartmentPrice +
-                ", apartmentAddress='" + apartmentAddress + '\'' +
-                ", apartmentArea='" + apartmentArea + '\'' +
-                ", dayMin=" + dayMin +
-                ", dayMax=" + dayMax +
-                '}';
     }
 }
